@@ -1,25 +1,22 @@
-FROM node:lts
+FROM node:20-slim
 
-# Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg imagemagick webp && apt-get clean
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    chromium \
+    imagemagick \
+    graphicsmagick \
+    webp \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files and install dependencies
 COPY package*.json ./
+RUN npm install --production --legacy-peer-deps
 
-# Install dependencies
-RUN npm install && npm cache clean --force
-
-# Copy application code
+# Copy the rest of the application
 COPY . .
 
-# Expose port
-EXPOSE 3000
-
-# Set environment
-ENV NODE_ENV production
-
-# Run command
-CMD ["npm", "run", "start", "index.js"]
+# Start the bot
+CMD ["node", "index.js"]
