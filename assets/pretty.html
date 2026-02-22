@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH MD BOT STATUS</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background: url("https://files.catbox.moe/eholpu.jpg") center/cover no-repeat;
+            font-family: "Poppins", Arial, sans-serif;
+            color: white;
+        }
+
+        /* Title Gradient */
+        .title {
+            margin-top: 40px;
+            font-size: 7vw;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(90deg, #1affd5, #5ab4ff, #7f77ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card */
+        .card {
+            width: 80%;
+            max-width: 500px;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .label {
+            font-size: 1.3rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1affb3;
+            text-shadow: 0 0 10px #1affb3;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            width: 100%;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .footer i {
+            color: #ff4d89;
+        }
+     </style>
+</head>
+
+<body>
+
+    <div class="title">TRUTH-MD<br>STATUS MONITOR</div>
+
+    <!-- Bot Status Card -->
+    <div class="card">
+        <div class="label"><i class="fas fa-server"></i> BOT STATUS</div>
+        <div id="botStatus" class="value">Checking...</div>
+    </div>
+
+    <!-- Uptime Card -->
+    <div class="card">
+        <div class="label"><i class="fas fa-clock"></i> UPTIME</div>
+        <div id="uptime" class="value">Loading...</div>
+    </div>
+
+    <div class="footer">Made with <i class="fas fa-heart"></i> by Courtney</div>
+
+    <script>
+                document.addEventListener("DOMContentLoaded", () => {
+            const spinner = document.getElementById("loadingSpinner");
+            const uptimeDiv = document.getElementById("uptime");
+
+            function updateUptime() {
+                fetch('/uptime')
+                    .then(response => response.json())
+                    .then(data => {
+                        uptimeDiv.textContent = data.uptime;
+                        spinner.classList.remove("active");
+                    })
+                    .catch(error => {
+                        console.error('Error fetching uptime:', error);
+                        spinner.classList.remove("active");
+                    });
+            }
+
+            // Initial fetch
+            spinner.classList.add("active");
+            updateUptime();
+
+            // Periodically fetch uptime every 3 seconds
+            setInterval(updateUptime, 3000);
+        });
+    </script>
+</body>
+</html>
