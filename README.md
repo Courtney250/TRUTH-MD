@@ -10,14 +10,14 @@ Advanced WhatsApp bot with premium features.
 
 ### 1. Get Pair Code 1 with subdomain 
 <div align="center">
-  <a href="https://web-production-a554.up.railway.app/">
+  <a href="https://techword-bot-pair-production.up.railway.app/">
     <img src="https://img.shields.io/badge/Get Pair Code-blue?style=for-the-badge&logo=whatsapp" alt="Pair Code"/>
   </a>
 </div>
 
 ### 1. Get Pair Code 2 on render
 <div align="center">
-  <a href="https://truthpair.onrender.com/">
+  <a href="https://techword-bot-pair-production.up.railway.app/">
     <img src="https://img.shields.io/badge/Get Pair Code-green?style=for-the-badge&logo=whatsapp" alt="Pair Code"/>
   </a>
 </div>
