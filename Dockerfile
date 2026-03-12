@@ -1,14 +1,14 @@
-FROM node:lts
+FROM node:20
 
-  RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg imagemagick webp git python3 make g++ && apt-get clean && rm -rf /var/lib/apt/lists/*
+  RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg imagemagick webp git && apt-get clean && rm -rf /var/lib/apt/lists/*
 
   WORKDIR /app
 
   COPY package*.json ./
 
-  RUN npm install --legacy-peer-deps --ignore-scripts && \
-      npm rebuild better-sqlite3 && \
-      npm cache clean --force
+  RUN npm install --legacy-peer-deps --ignore-scripts
+
+  RUN cd /app/node_modules/better-sqlite3 && npx --yes prebuild-install -r napi || echo "prebuild download skipped"
 
   COPY . .
 
