@@ -1,0 +1,10 @@
+node_modules/
+  session/
+  *.db
+  *.log
+  .env.local
+  .env.production
+
+  # Never commit real credentials
+  # Use .env as template only — fill values in Heroku config vars
+  
