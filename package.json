@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "node scripts/patch-baileys.cjs",
-    "heroku-postbuild": "npm rebuild sharp --build-from-source || true"
+    "heroku-postbuild": "npm rebuild sharp --build-from-source || true",
+    "prestart": "npm install --legacy-peer-deps --prefer-offline 2>/dev/null || npm install --legacy-peer-deps"
   },
   "author": "courtney",
   "license": "ISC",
