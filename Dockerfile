@@ -9,7 +9,7 @@ COPY package*.json ./
 # Step 1: Install all deps WITHOUT scripts (prevents libsignal native build failure)
 RUN npm install --legacy-peer-deps --ignore-scripts
 
-# Step 2: Download prebuilt better-sqlite3 binary (no source compilation)
+# Step 2: Compile better-sqlite3 native binary from source (requires python3/make/g++ above)
 RUN npm install better-sqlite3@12.8.0 --legacy-peer-deps --build-from-source
 
 # Step 3: Remove sharp installed without binary and reinstall it fresh with postinstall
